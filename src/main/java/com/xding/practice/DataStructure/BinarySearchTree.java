@@ -1,4 +1,4 @@
-package com.xding.codepractice.DataStructure;
+package com.xding.practice.DataStructure;
 
 import java.nio.BufferUnderflowException;
 

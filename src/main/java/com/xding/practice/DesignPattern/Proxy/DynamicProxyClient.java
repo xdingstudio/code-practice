@@ -1,4 +1,4 @@
-package com.xding.codepractice.DesignPattern.Proxy;
+package com.xding.practice.DesignPattern.Proxy;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Proxy;

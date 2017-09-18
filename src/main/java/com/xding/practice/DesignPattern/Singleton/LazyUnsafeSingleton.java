@@ -1,4 +1,4 @@
-package com.xding.codepractice.DesignPattern.Singleton;
+package com.xding.practice.DesignPattern.Singleton;
 
 public class LazyUnsafeSingleton{
     private static LazyUnsafeSingleton instance;

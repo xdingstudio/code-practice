@@ -14,7 +14,7 @@ import java.util.concurrent.TimeUnit;
  * @version 0.1 2017/9/12
  */
 @Component
-public class DistributedLock {
+public class RedisDistributeLock {
     @Autowired
     StringRedisTemplate template;
 
