@@ -1,4 +1,4 @@
-package com.xding.practice.DataStructure;
+package com.xding.practice.dataStructure;
 
 /**
  * @author xding

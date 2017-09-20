@@ -1,4 +1,4 @@
-package com.xding.practice.DesignPattern.Singleton;
+package com.xding.practice.designPattern.Singleton;
 
 /**
  * @author xding

@@ -1,4 +1,4 @@
-package com.xding.practice.DesignPattern.Proxy;
+package com.xding.practice.designPattern.Proxy;
 
 /**
  * @author xding
