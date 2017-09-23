@@ -1,4 +1,4 @@
-package com.xding.practice.Basic;
+package com.xding.practice.basic;
 
 import java.util.Random;
 
