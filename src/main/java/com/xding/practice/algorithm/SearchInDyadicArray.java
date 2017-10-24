@@ -16,7 +16,8 @@ public class SearchInDyadicArray {
             } else if (array[row][col] < target) {
                 row++;
             } else if (array[row][col] == target) {
-                found = true; // 统一输出处理
+                // 统一输出处理
+                found = true;
                 break;
             }
         }

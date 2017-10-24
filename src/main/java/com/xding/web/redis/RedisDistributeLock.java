@@ -59,7 +59,6 @@ public class RedisDistributeLock {
         String lockKey = "lock:" + lockName;
 
         while (true) {
-            //            template.watch(lockKey);
             if (identifier.equals(template.opsForValue().get(lockKey))) {
                 template.multi();
                 template.delete(lockKey);
