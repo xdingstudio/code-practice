@@ -1,9 +1,6 @@
 package com.xding.practice.basic.nio;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 import java.nio.ByteBuffer;
 import java.nio.channels.FileChannel;
 
@@ -15,16 +12,21 @@ import java.nio.channels.FileChannel;
  * @author xding
  * @version 0.1 2017/9/19
  */
-public class GetChannel {
+public class FileUtil {
     private static final int BSIZE = 1024;
 
-    public static void main(String[] args) {
+    public static void writeFile(String filePath, String text) {
         // 可以向通道传送用于读写的 ByteBuffer
         FileChannel channel = null;
         // Write a file
         try {
-            channel = new FileOutputStream("data.txt").getChannel();
-            channel.write(ByteBuffer.wrap("Some text ".getBytes()));
+            File file = new File(filePath);
+            File parentFile = file.getParentFile();
+            if (!parentFile.exists()) {
+                parentFile.mkdirs();
+            }
+            channel = new FileOutputStream(file).getChannel();
+            channel.write(ByteBuffer.wrap(text.getBytes()));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -36,12 +38,20 @@ public class GetChannel {
                 }
             }
         }
+    }
 
+    public static void addFile(String filePath, String text) {
+        FileChannel channel = null;
         // Add to the end of the file
         try {
-            channel = new RandomAccessFile("data.txt", "rw").getChannel();
+            File file = new File(filePath);
+            File parentFile = file.getParentFile();
+            if (!parentFile.exists()) {
+                parentFile.mkdirs();
+            }
+            channel = new RandomAccessFile(file, "rw").getChannel();
             channel.position(channel.size());
-            channel.write(ByteBuffer.wrap("Some more".getBytes()));
+            channel.write(ByteBuffer.wrap(text.getBytes()));
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -53,10 +63,13 @@ public class GetChannel {
                 }
             }
         }
+    }
 
+    public static void readFile(String filePath) {
+        FileChannel channel = null;
         // Read the file
         try {
-            channel = new FileInputStream("data.txt").getChannel();
+            channel = new FileInputStream(filePath).getChannel();
             // 显示分配 ByteBuffer
             ByteBuffer buffer = ByteBuffer.allocate(BSIZE);
             channel.read(buffer);
@@ -77,6 +90,6 @@ public class GetChannel {
                 }
             }
         }
-
     }
+
 }
