@@ -8,6 +8,14 @@ import java.util.Collections;
  * @version 0.1 2017/9/30
  */
 public class PrintList {
+    public static class ListNode {
+        int val;
+        ListNode next = null;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
 
     public ArrayList<Integer> printListFromTailToHead(ListNode listNode) {
         ArrayList<Integer> arrayList = new ArrayList<>();

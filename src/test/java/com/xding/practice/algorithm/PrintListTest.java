@@ -1,6 +1,7 @@
 package com.xding.practice.algorithm;
 
 import org.junit.Test;
+import com.xding.practice.algorithm.PrintList.ListNode;
 
 public class PrintListTest {
     @Test

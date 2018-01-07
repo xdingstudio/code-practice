@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class PrintListFromTailToHead {
 
-    public class ListNode {
+    public static class ListNode {
         int val;
         ListNode next = null;
 

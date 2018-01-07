@@ -11,10 +11,10 @@ public class PrintListFromTailToHeadTest {
     @Test
     public void test1() throws Exception {
         PrintListFromTailToHead solution = new PrintListFromTailToHead();
-        ListNode node1 = solution.new ListNode(67);
-        ListNode node2 = solution.new ListNode(0);
-        ListNode node3 = solution.new ListNode(24);
-        ListNode node4 = solution.new ListNode(58);
+        ListNode node1 = new ListNode(67);
+        ListNode node2 = new ListNode(0);
+        ListNode node3 = new ListNode(24);
+        ListNode node4 = new ListNode(58);
         node1.next = node2;
         node2.next = node3;
         node3.next = node4;
