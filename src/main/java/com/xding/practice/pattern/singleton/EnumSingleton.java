@@ -6,6 +6,9 @@ package com.xding.practice.pattern.singleton;
  */
 public class EnumSingleton {
     public enum EasySingleton {
+        /**
+         * 采用枚举类实现单例
+         */
         INSTANCE;
 
         public void doSomething() {

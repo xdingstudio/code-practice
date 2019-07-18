@@ -6,7 +6,7 @@ package com.xding.practice.pattern.singleton;
  */
 public class StaticNestedClassSingleton {
     private static class SingletonHolder {
-        private static final StaticNestedClassSingleton INSTANCE = new StaticNestedClassSingleton();
+        private static StaticNestedClassSingleton INSTANCE = new StaticNestedClassSingleton();
     }
 
     private StaticNestedClassSingleton() {

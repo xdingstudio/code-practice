@@ -5,7 +5,9 @@ package com.xding.practice.pattern.singleton;
  * @version : v1.0
  */
 public class DoubleCheckedSingleton {
-    // 使用 volatile 的主要原因：禁止指令重排序优化
+    /**
+     * 使用 volatile 的主要原因：禁止指令重排序优化
+     */
     private volatile static DoubleCheckedSingleton instance;
 
     private DoubleCheckedSingleton() {
