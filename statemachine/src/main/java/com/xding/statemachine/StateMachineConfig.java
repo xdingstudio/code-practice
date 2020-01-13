@@ -3,6 +3,7 @@ package com.xding.statemachine;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.statemachine.action.Action;
 import org.springframework.statemachine.config.EnableStateMachine;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineConfigurationConfigurer;
@@ -11,8 +12,6 @@ import org.springframework.statemachine.config.builders.StateMachineTransitionCo
 import org.springframework.statemachine.listener.StateMachineListener;
 import org.springframework.statemachine.listener.StateMachineListenerAdapter;
 import org.springframework.statemachine.transition.Transition;
-
-import java.util.EnumSet;
 
 /**
  * 参考：使用Spring StateMachine框架实现状态机 http://blog.didispace.com/spring-statemachine/
@@ -28,28 +27,29 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
     @Override
     public void configure(StateMachineConfigurationConfigurer<States, Events> config) throws Exception {
         config.withConfiguration()
-                .listener(listener());
+            .listener(listener());
     }
 
     @Override
     public void configure(StateMachineStateConfigurer<States, Events> states) throws Exception {
         states.withStates()
-                .initial(States.UNPAID)
-                .states(EnumSet.allOf(States.class));
+            .initial(States.UNPAID, action())
+            .state(States.WAITING_FOR_RECEIVE, null, action())
+            .state(States.DONE, action(), null);
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<States, Events> transitions) throws Exception {
         transitions
-                .withExternal()
-                .source(States.UNPAID)
-                .target(States.WAITING_FOR_RECEIVE)
-                .event(Events.PAY)
-                .and()
-                .withExternal()
-                .source(States.WAITING_FOR_RECEIVE)
-                .target(States.DONE)
-                .event(Events.RECEIVE);
+            .withExternal()
+            .source(States.UNPAID)
+            .target(States.WAITING_FOR_RECEIVE)
+            .event(Events.PAY)
+            .and()
+            .withExternal()
+            .source(States.WAITING_FOR_RECEIVE)
+            .target(States.DONE)
+            .event(Events.RECEIVE);
     }
 
     @Bean
@@ -63,17 +63,24 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<States
                 }
 
                 if (transition.getSource().getId() == States.UNPAID
-                        && transition.getTarget().getId() == States.WAITING_FOR_RECEIVE) {
+                    && transition.getTarget().getId() == States.WAITING_FOR_RECEIVE) {
                     log.info("用户完成支付，待收货");
                     return;
                 }
 
                 if (transition.getSource().getId() == States.WAITING_FOR_RECEIVE
-                        && transition.getTarget().getId() == States.DONE) {
+                    && transition.getTarget().getId() == States.DONE) {
                     log.info("用户已收货，订单完成");
                     return;
                 }
             }
         };
+    }
+
+    @Bean
+    public Action<States, Events> action() {
+        //        return context -> log.info("do action! source:{}, target:{}, event:{}",
+        //                                   context.getSource().getId(), context.getTarget().getId(), context.getEvent().toString());
+        return context -> log.info("do action! ");
     }
 }
