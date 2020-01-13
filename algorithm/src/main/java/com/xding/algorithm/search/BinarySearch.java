@@ -8,6 +8,14 @@ package com.xding.algorithm.search;
  */
 public class BinarySearch {
 
+    /**
+     * 二分查找的递归实现
+     *
+     * @param a
+     * @param n
+     * @param val
+     * @return
+     */
     public int binarySearch(int[] a, int n, int val) {
         return binarySearchInternally(a, 0, n - 1, val);
     }
@@ -16,7 +24,7 @@ public class BinarySearch {
         if (low > high) {
             return -1;
         }
-        
+
         //        int mid = (low + high) / 2;
         // 改进加法，避免数据范围过大时加和溢出
         int mid = low + (high - low) / 2;
