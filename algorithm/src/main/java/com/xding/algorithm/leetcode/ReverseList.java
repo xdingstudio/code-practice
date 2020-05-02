@@ -49,4 +49,18 @@ public class ReverseList {
         }
         return newHead.next;
     }
+
+    /**
+     * 递归实现
+     * reverse()方法定义：输入一个节点 head，将「以 head 为起点」的链表反转，并返回反转之后的头结点。
+     */
+    public ListNode reverse(ListNode head) {
+        if (head.next == null) {
+            return head;
+        }
+        ListNode last = reverse(head.next);
+        head.next.next = head;
+        head.next = null;
+        return last;
+    }
 }
