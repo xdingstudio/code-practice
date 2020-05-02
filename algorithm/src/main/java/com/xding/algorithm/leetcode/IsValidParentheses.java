@@ -19,7 +19,7 @@ import java.util.Stack;
  * @author xding
  * @date 2020/5/2 17:15
  */
-public class IsValidBracket {
+public class IsValidParentheses {
 
     /**
      * 使用栈进行匹配判断，用 hash 表缓存映射字符
