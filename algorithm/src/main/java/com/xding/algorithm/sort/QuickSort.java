@@ -25,7 +25,7 @@ public class QuickSort {
      * @param nums
      * @return
      */
-    public int[] quickSort(int[] nums) {
+    public int[] sortArray(int[] nums) {
         if (nums == null || nums.length == 0) {
             return null;
         }
@@ -68,7 +68,7 @@ public class QuickSort {
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
         int[] nums = {5, 2, 3, 1};
-        quickSort.quickSort(nums);
+        quickSort.sortArray(nums);
         log.info("sort finish! nums:{}", nums);
     }
 }
