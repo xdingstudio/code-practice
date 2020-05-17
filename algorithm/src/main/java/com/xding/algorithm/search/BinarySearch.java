@@ -25,7 +25,6 @@ public class BinarySearch {
             return -1;
         }
 
-        //        int mid = (low + high) / 2;
         // 改进加法，避免数据范围过大时加和溢出
         int mid = low + (high - low) / 2;
         if (a[mid] == val) {
