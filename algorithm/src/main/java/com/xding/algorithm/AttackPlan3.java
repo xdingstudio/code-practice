@@ -7,7 +7,10 @@ import org.slf4j.LoggerFactory;
 import java.util.*;
 
 /**
- * Class Description
+ * 排刀算法，应用贪心算法+动态规划思想。
+ * 先对全员 3 队对各个 boss 的伤害排序，伤害高的排在前面，然后按优先级取对某个 boss 的伤害值，如对 boss1 时，先取最高优先级中对 boss1 的伤害，
+ * 若总伤害低于 boss 血量，则再取次优先级中对 boss1 的伤害，直至总伤害超过 boss 血量，然后在这些伤害中寻找总和刚好超过 boss 血量的组合，记录组合并从总数据中删除，
+ * 然后再在总数据中找下一个 boss 的组合，直至全部找完。
  *
  * @author xding
  * @date 2020/5/18 01:37
