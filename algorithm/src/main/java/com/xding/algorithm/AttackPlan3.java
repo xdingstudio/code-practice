@@ -1,9 +1,5 @@
 package com.xding.algorithm;
 
-import com.alibaba.fastjson.JSON;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.*;
 
 /**
@@ -16,7 +12,7 @@ import java.util.*;
  * @date 2020/5/18 01:37
  */
 public class AttackPlan3 {
-    private static final Logger log = LoggerFactory.getLogger(AttackPlan3.class);
+    //    private static final Logger log = LoggerFactory.getLogger(AttackPlan3.class);
 
     private static class Damage {
         /**
@@ -145,9 +141,9 @@ public class AttackPlan3 {
         List<Boss> bossList = new ArrayList<>();
         bossList.add(new Boss(2, 520));
         bossList.add(new Boss(3, 1200));
-        bossList.add(new Boss(4, 1400));
-        bossList.add(new Boss(0, 500));
-        bossList.add(new Boss(1, 1000));
+        bossList.add(new Boss(4, 2000));
+        bossList.add(new Boss(0, 600));
+        bossList.add(new Boss(1, 800));
 
         AttackPlan3 plan = new AttackPlan3();
 
@@ -156,7 +152,7 @@ public class AttackPlan3 {
                 break;
             }
             List<Damage> damageList = plan.solve(totalDamageList, boss.no, boss.hp);
-            log.info("damageList:{}", JSON.toJSONString(damageList));
+            //            log.info("damageList:{}", JSON.toJSONString(damageList));
         }
 
     }
@@ -194,6 +190,40 @@ public class AttackPlan3 {
 
     public List<Damage> solve(List<List<Damage>> totalDamageList, int boss, double hp) {
         List<Damage> curDamageList = new ArrayList<>();
+        double curTotalDamage = 0;
+
+        // 按优先级取超过 boss 血量的队伍
+        for (int j = 0; j < 5; j++) {
+            for (int i = 0; i < totalDamageList.size(); i++) {
+                List<Damage> sortedDamageList = totalDamageList.get(i);
+                if (sortedDamageList == null || sortedDamageList.isEmpty()) {
+                    continue;
+                }
+                Damage damage = sortedDamageList.get(j);
+                if (damage.boss == boss && damage.damage > 0) {
+                    curDamageList.add(damage);
+                    curTotalDamage += damage.damage;
+                }
+            }
+            if (curTotalDamage > hp) {
+                break;
+            }
+        }
+
+        // 计算本次 boss 的出刀队伍
+        List<Damage> attackList = compute(curDamageList, (int) hp * 10);
+
+        // 从总队伍中删除本次的出刀队伍
+        for (Damage damage : attackList) {
+            totalDamageList.set(damage.no, null);
+        }
+
+        return attackList;
+    }
+
+    public List<Damage> solve2(List<List<Damage>> totalDamageList, int boss, double hp) {
+        List<Damage> curDamageList = new ArrayList<>();
+        PriorityQueue<Damage> queue = new PriorityQueue<Damage>((o1, o2) -> (int) (o2.damage - o1.damage));
         double curTotalDamage = 0;
 
         // 按优先级取超过 boss 血量的队伍
@@ -285,10 +315,10 @@ public class AttackPlan3 {
             }
         }
 
-        log.info("state array:");
-        for (int i = 0; i < iLength; i++) {
-            log.info(Arrays.toString(dp[i]));
-        }
+        //        log.info("state array:");
+        //        for (int i = 0; i < iLength; i++) {
+        //            log.info(Arrays.toString(dp[i]));
+        //        }
 
         int j = resultJ;
         List<Damage> resultList = new ArrayList<>();
@@ -307,11 +337,14 @@ public class AttackPlan3 {
         if (j != 0) {
             resultList.add(damageList.get(0));
         }
+        resultList.sort(Comparator.comparingInt(o -> o.user));
 
         for (Damage damage : resultList) {
-            log.info("第 {} 位成员 {} 队出刀，对 boss{} 的伤害:{}", damage.user + 1, damage.team + 1, damage.boss + 1, damage.damage);
+            //            log.info("第 {} 位成员 {} 队出刀，对 boss{} 的伤害:{}", damage.user + 1, damage.team + 1, damage.boss + 1, damage.damage);
+            System.out.println("第 " + (damage.user + 1) + " 位成员 " + (damage.team + 1) + " 队出刀，对 boss" + (damage.boss + 1) + " 的伤害:" + damage.damage);
         }
-        log.info("boss剩余血量：{}，出刀总伤害：{}", hp / 10.0, resultDamage / 10.0);
+        //        log.info("boss剩余血量：{}，出刀总伤害：{}", hp / 10.0, resultDamage / 10.0);
+        System.out.println("boss剩余血量：" + (hp / 10.0) + "，出刀总伤害：" + (resultDamage / 10.0));
 
         return resultList;
     }
