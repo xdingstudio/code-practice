@@ -1,4 +1,4 @@
-package com.xding.algorithm.leetcode;
+package com.xding.algorithm.leetcode.string;
 
 /**
  * 344. 反转字符串
