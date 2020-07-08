@@ -1,4 +1,4 @@
-package com.xding.algorithm.leetcode;
+package com.xding.algorithm.leetcode.list;
 
 import java.util.PriorityQueue;
 import java.util.Queue;

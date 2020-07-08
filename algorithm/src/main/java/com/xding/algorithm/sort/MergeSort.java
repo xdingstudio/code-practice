@@ -39,6 +39,7 @@ public class MergeSort {
     }
 
     private void merge(int[] nums, int start1, int end1, int start2, int end2) {
+        // 合并两个有序数组，可以不借用额外空间，从尾部进行合并，避免移动数据
         int[] temp = new int[end2 - start1 + 1];
         int i = 0;
         int left = start1;

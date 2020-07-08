@@ -1,4 +1,4 @@
-package com.xding.algorithm;
+package com.xding.algorithm.attack;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

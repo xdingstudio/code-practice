@@ -1,4 +1,4 @@
-package com.xding.algorithm.leetcode;
+package com.xding.algorithm.leetcode.list;
 
 /**
  * 反转一个单链表。

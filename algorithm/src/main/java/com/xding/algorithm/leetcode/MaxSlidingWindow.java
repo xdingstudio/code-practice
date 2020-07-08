@@ -36,36 +36,37 @@ import java.util.ArrayDeque;
  */
 public class MaxSlidingWindow {
 
-    /**
-     * 递归，用一个二维数组存储每次递归的最大值，递归公式：
-     * 1.max[1][j] = nums[j]
-     * 2.max[i][j] = max[i-1][j] > nums[j+i-1] ? max[i-1][j] : nums[j+i-1];
-     * 1 <= i <= k; 0 <= j <= length - i;
-     * 可用循环实现
-     * max[0][j] = nums[j]时，1 公式可用 2 代替
-     * <p>
-     * 二维数组空间复杂度O(k*n)，改用一维数组
-     *
-     * @param nums
-     * @param k
-     * @return
-     */
-    public int[] maxSlidingWindow(int[] nums, int k) {
-        int[] max = new int[nums.length];
-        for (int i = 0; i < nums.length; i++) {
-            max[i] = nums[i];
-        }
-        for (int n = 1; n <= k; n++) {
-            for (int i = 0; i <= nums.length - n; i++) {
-                max[i] = max[i] > nums[i + n - 1] ? max[i] : nums[i + n - 1];
-            }
-        }
-        int[] result = new int[nums.length - k + 1];
-        for (int i = 0; i < nums.length - k + 1; i++) {
-            result[i] = max[i];
-        }
-        return result;
-    }
+    // 貌似不对？
+//    /**
+//     * 递归，用一个二维数组存储每次递归的最大值，递归公式：
+//     * 1.max[1][j] = nums[j]
+//     * 2.max[i][j] = max[i-1][j] > nums[j+i-1] ? max[i-1][j] : nums[j+i-1];
+//     * 1 <= i <= k; 0 <= j <= length - i;
+//     * 可用循环实现
+//     * max[0][j] = nums[j]时，1 公式可用 2 代替
+//     * <p>
+//     * 二维数组空间复杂度O(k*n)，改用一维数组
+//     *
+//     * @param nums
+//     * @param k
+//     * @return
+//     */
+//    public int[] maxSlidingWindow(int[] nums, int k) {
+//        int[] max = new int[nums.length];
+//        for (int i = 0; i < nums.length; i++) {
+//            max[i] = nums[i];
+//        }
+//        for (int n = 1; n <= k; n++) {
+//            for (int i = 0; i <= nums.length - n; i++) {
+//                max[i] = max[i] > nums[i + n - 1] ? max[i] : nums[i + n - 1];
+//            }
+//        }
+//        int[] result = new int[nums.length - k + 1];
+//        for (int i = 0; i < nums.length - k + 1; i++) {
+//            result[i] = max[i];
+//        }
+//        return result;
+//    }
 
     /**
      * 可以利用一个双端队列来表示这个窗口。这个双端队列保存当前窗口中最大那个数的下标，双端队列新的头总是当前窗口中最大的那个数。

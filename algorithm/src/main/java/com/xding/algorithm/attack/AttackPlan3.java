@@ -1,4 +1,4 @@
-package com.xding.algorithm;
+package com.xding.algorithm.attack;
 
 import java.util.*;
 

@@ -63,7 +63,6 @@ public class ReverseWords {
             return "";
         }
 
-
         Stack<String> stack = new Stack<>();
 
         String[] wordArray = s.split(" ");
@@ -86,7 +85,7 @@ public class ReverseWords {
     }
 
     /**
-     * 将字符串去除多余空格并全部翻转，然后对每个单子再进行翻转
+     * 将字符串去除多余空格并全部翻转，然后对每个单词再进行翻转
      *
      * @param s
      * @return
